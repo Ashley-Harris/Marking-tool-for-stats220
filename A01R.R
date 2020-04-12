@@ -11,7 +11,7 @@ student.df <- read.csv("lab01-marks-c-3.csv", header = TRUE, stringsAsFactors = 
 std.num<- nrow(student.df)
 
 # Initialze the output dataframe
-mark.df <- data.frame(matrix(vector(), ncol = 7))
+mark.df <- data.frame(matrix(vector(), ncol = 9))
 colnames(mark.df) <- names(student.df)
 
 
@@ -27,30 +27,28 @@ for (i in 1:std.num){
   opencmd <- paste("open ","submissions/*",stdId,"*", sep = "")
   system(opencmd)
   
-  # Enter indention mark: 3 marks, only up to the line about Perl, Lua, Groovy.
+  # Enter appearance mark: 6 marks
   mark01 =  as.numeric(readline(prompt = "Enter Indentation marks --> ")) 
   
-  #Enter comment marks: total 2 marks. Give one mark for a comment about fixing the       </strong> tag which should have been <strong> instead. Give one more mark for a comment about closing the div element near the bottom of the page.
-  mark03 = as.numeric(readline(prompt = "Enter comment marks --> "))
+  #Enter CSS marks: total 2 marks. 
+  mark02 = as.numeric(readline(prompt = "Enter comment marks --> "))
   
-  ###Use tidy to check errors,please CHANGE THE FOLDER NAME, if you save submissions in different folder 
-  tidycmd <- paste("tidy submissions/*", stdId, "*"," >/dev/null" ,sep = "")
-  system(tidycmd)
+  # Enter indention mark: 3 marks
+  mark03 =  as.numeric(readline(prompt = "Enter Indentation marks --> ")) 
   
-  #Enter validation mark: total 3 marks 
-  mark02 = as.numeric(readline(prompt = "Enter Validation marks --> ")) 
-  
+  #Enter comments marks: total 2 marks. 
+  mark04 = as.numeric(readline(prompt = "Enter comment marks --> "))
 
-  #Convert total marks based on 1. 
-  total = round(sum(mark01, mark02, mark03) / 8, digits = 2)
+  #Calculate total marks out of 15. 
+  total = sum(mark01, mark02, mark03, student[6], mark04)
   
   # Add the marks into the csv file
-  student[3:6] <- c(mark01, mark02, mark03, total)
-
+  student[3:5] <- c(mark01, mark02, mark03)
+  student[7:8] <- c(mark04, total)
   
   # Ask if the marker wants to add comments to the student
   comments <- readline(prompt = "Any comments for this student? --> ")
-  student[7] <- comments
+  student[9] <- comments
   mark.df[i,] <- student
   print("Student has been marked, details as follows")
   print(mark.df[i,])
