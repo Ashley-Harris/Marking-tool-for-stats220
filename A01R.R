@@ -6,7 +6,7 @@
 
 
 # Read your student list
-student.df <- read.csv("lab01-marks-c-1.csv", header = TRUE, stringsAsFactors = FALSE)
+student.df <- read.csv("lab01-marks-c-3.csv", header = TRUE, stringsAsFactors = FALSE)
 # Get total student number
 std.num<- nrow(student.df)
 
@@ -48,11 +48,11 @@ for (i in 1:std.num){
   student[3:6] <- c(mark01, mark02, mark03, total)
 
   
-  # Ask if the marker wants to add comments to the stuent
+  # Ask if the marker wants to add comments to the student
   comments <- readline(prompt = "Any comments for this student? --> ")
   student[7] <- comments
   mark.df[i,] <- student
-  print("Student is been marked, details as follows")
+  print("Student has been marked, details as follows")
   print(mark.df[i,])
 }
 
@@ -87,5 +87,5 @@ for (i in 1:std.num){
 # }
 
 ##Export your marks to csv file
-write.table(mark.df, "/Users/Joy/Documents/UoA/Lab01-marks-c-1.csv", row.names = FALSE, sep = ",")
+write.table(mark.df, "/Users/Joy/Documents/UoA/Lab01-marks-c-3.csv", row.names = FALSE, sep = ",")
 
